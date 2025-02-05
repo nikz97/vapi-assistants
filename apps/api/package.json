@@ -15,11 +15,20 @@
     "preset": "@repo/jest-presets/node"
   },
   "dependencies": {
+    "@bull-board/express": "^6.7.4",
     "@repo/logger": "*",
+    "@repo/mongoose-schema": "*",
+    "@types/mongoose": "^5.11.97",
+    "@vapi-ai/server-sdk": "^0.4.0",
     "body-parser": "^1.20.3",
+    "bullmq": "^5.40.0",
     "cors": "^2.8.5",
     "express": "^5.0.1",
-    "morgan": "^1.10.0"
+    "ioredis": "^5.4.2",
+    "morgan": "^1.10.0",
+    "openai": "4.55.1",
+    "redis": "^4.7.0",
+    "winston": "^3.13.0"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
