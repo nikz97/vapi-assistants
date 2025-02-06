@@ -1,8 +1,8 @@
 // mongodb.ts
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import logger from "./../utils/logger.js";
 import CONFIG from "./../config/index.js";
-import { ExtractionJob } from "@repo/mongoose-schema";
+import { APPOINTMENT_STATUS, SCHEMA_NAMES, WORKFLOW_STAGES } from "../utils/constants.js";
 
 mongoose.set('bufferTimeoutMS', 30000);  // Increase buffer timeout
 
@@ -52,5 +52,37 @@ export const getDb = async () => {
   }
   return mongoose.connection;
 };
+
+const patientSchema = new Schema({
+  patientId: String,
+  name: String,
+  age: Number,
+  paymentDetails: [{ type: Schema.Types.Mixed }],
+  insuranceDetails: [{ type: Schema.Types.Mixed}],
+  address: [{ type: Schema.Types.Mixed}],
+  phoneNumber: String,
+  appointments: [{ type: Schema.Types.Mixed }],
+  sendReminders: Boolean,
+  status: String,
+},{
+  timestamps: true
+});
+
+export const Patient = mongoose.model(SCHEMA_NAMES.PATIENT, patientSchema);
+
+const workflowSchema = new Schema({
+  patient: { type: Schema.Types.Mixed, ref: SCHEMA_NAMES.PATIENT, required: true },
+  provider: { type: Schema.Types.Mixed, ref: SCHEMA_NAMES.PROVIDER, required: true },
+  appointment: { type:Schema.Types.Mixed, ref: SCHEMA_NAMES.APPOINTMENT, required: true },
+  appointmentType: { type: String, required: true },
+  status: { type: String, APPOINTMENT_STATUS, default: APPOINTMENT_STATUS.NOT_CONTACTED, required: true },
+  currentStage: { type: String, WORKFLOW_STAGES, default: WORKFLOW_STAGES.NOT_CONTCATED, required: true },
+  nextStage: { type: String, WORKFLOW_STAGES },
+  errorDetails: { type: String },
+},{
+  timestamps: true
+});
+
+export const Workflow = mongoose.model(SCHEMA_NAMES.WORKFLOW, workflowSchema);
 
 export default getDb;

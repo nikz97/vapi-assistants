@@ -1,9 +1,11 @@
+import { Patient } from "@repo/mongoose-schema";
 
 export async function updatePatientData(extractedData: any) {
     const patientId = extractedData.patientId;
 
-    // const patient = await Patient.findOne({ _id: patientId });  fetch from patient collection
-    if(!patientId) {
+    //fetch from patient collection
+    const patient = await Patient.findOne({ patientId });  
+    if(!patient) {
         throw new Error("Patient Id not found in the extracted data");
     }
 
@@ -15,9 +17,10 @@ export async function updatePatientData(extractedData: any) {
         address: extractedData.address,
         phoneNumber: extractedData.phoneNumber
     }
-    //Update the document
-    // await Patient.updateOne({ _id: patientId },
-    //      { $set: patientData });
+    
+    // Update the document
+    await Patient.updateOne({ patientId },
+         { $set: patientData });
 
     return patientData;
 }

@@ -16,6 +16,8 @@ Required fields to extract:
   "appointmentSlot": string | null, // HH:MM format
   "doctorToVisit": string | null,
   "appointmentType": string | null // Must be one of: INITIAL, FOLLOW_UP, PROCEDURE, CONSULTATION
+  "callType: string | null // Must be one of: INBOUND, OUTBOUND
+  
 }
 
 Example response:

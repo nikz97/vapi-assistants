@@ -1,8 +1,9 @@
 import logger from "../../utils/logger";
 import SessionManager from "../session-manager";
-import { endOfCallReportHandler } from "./end-of-call-report";
+import { endOfCallReportHandler } from "./webhook/end-of-call-report";
 
 import { VapiWebhookEnum } from "./types";
+import { statusUpdateHandler } from "./webhook/status-update";
 
 
 export class CallbackManager {
@@ -20,12 +21,15 @@ export class CallbackManager {
       );
   
       switch (payload.type) {
+        case VapiWebhookEnum.STATUS_UPDATE:
+          return await statusUpdateHandler(sessionManager, payload);
+        
         case VapiWebhookEnum.END_OF_CALL_REPORT:
           return await endOfCallReportHandler(sessionManager, payload);
   
         default:
-          logger.error(`Unhandled message type: ${payload.type}`);
-          throw new Error(`Unhandled message type`);
+          logger.info(`Unhandled message type: ${payload.type}`);
+          return;
       }
     }
   }

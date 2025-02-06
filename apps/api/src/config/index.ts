@@ -10,13 +10,17 @@ interface EnvConfig {
   OPENAI_KEY?: string;
   PORTKEY_KEY?: string;
   VAPI_KEY?: string;
+  NGROK_URL?: string;
+  SCHEDULING_ASSISTANT_ID?: string;
+  REMINDER_AND_PAYMENT_ASSISTANT_ID?: string;
+  OUTBOUNT_ENQUIRY_ASSISTANT_ID?: string;
 }
 
 let envConfig: EnvConfig = {};
 try {
   envConfig = JSON.parse(process.env.ENV || "{}") as EnvConfig; // Default to empty object if ENV is not set
 } catch (error) {
-  console.error("Error parsing ENV:", error);
+  console.log("Error parsing ENV:", error);
 }
 
 // Create the CONFIG object
@@ -39,6 +43,19 @@ const CONFIG = {
     envConfig.PORTKEY_KEY || process.env.PORTKEY_KEY || "your_portkey_api_key",
   VAPI_KEY:
     envConfig.VAPI_KEY || process.env.VAPI_KEY || "your_vapi_api_key",
+  NGROK_URL: envConfig.NGROK_URL || process.env.NGROK_URL || "http://localhost:4040",
+  SCHEDULING_ASSISTANT_ID:
+    envConfig.SCHEDULING_ASSISTANT_ID ||
+    process.env.SCHEDULING_ASSISTANT_ID ||
+    "your_scheduling_assistant_id",
+  REMINDER_AND_PAYMENT_ASSISTANT_ID:
+    envConfig.REMINDER_AND_PAYMENT_ASSISTANT_ID ||
+    process.env.REMINDER_AND_PAYMENT_ASSISTANT_ID ||
+    "your_reminder_and_payment_assistant_id",
+  OUTBOUNT_ENQUIRY_ASSISTANT_ID:
+    envConfig.OUTBOUNT_ENQUIRY_ASSISTANT_ID ||  
+    process.env.OUTBOUNT_ENQUIRY_ASSISTANT_ID ||  
+    "your_outbount_enquiry_assistant_id",
 };
 
 export default CONFIG;

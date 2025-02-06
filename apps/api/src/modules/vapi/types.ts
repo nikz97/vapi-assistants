@@ -13,6 +13,7 @@ export enum VapiWebhookEnum {
     ASSISTANT_REQUEST = "assistant-request",
     FUNCTION_CALL = "function-call",
     STATUS_UPDATE = "status-update",
+    CONVERSATION_UPDATE = "conversation-update",
     END_OF_CALL_REPORT = "end-of-call-report",
     HANG = "hang",
 };
