@@ -1,7 +1,7 @@
-/** @type {import('jest').Config} */
+import type { Config } from "jest";
+
 const config = {
   roots: ["<rootDir>"],
-  testEnvironment: "jsdom",
   transform: {
     "^.+\\.tsx?$": "ts-jest",
   },
@@ -12,6 +12,6 @@ const config = {
     "<rootDir>/dist",
   ],
   preset: "ts-jest",
-};
+} as const satisfies Config;
 
 export default config;
