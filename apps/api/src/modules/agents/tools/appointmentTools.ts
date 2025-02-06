@@ -1,7 +1,6 @@
 
 /**
  * These are the list of tools that the Appointmnents agent can call based on the type of the tool call.
- * The tools are defined in the prompts.ts file
  * 
 **/
 

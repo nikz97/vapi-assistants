@@ -26,7 +26,6 @@ export class VapiService {
     return call;
   }
 
-
   async createVapiAssistant(
     sessionId: string,
     systemPrompt: string,
@@ -84,7 +83,7 @@ export class VapiService {
             provider: "openai",
 
         },
-        firstMessage: "Hello, this is Eva. A, from Adam's Clinic. How can I assist you today?",
+        firstMessage: "Hello, this is Eva. A, from Adam's Clinic.",
         serverMessages: [
             VapiWebhookEnum.CONVERSATION_UPDATE,
             VapiWebhookEnum.STATUS_UPDATE,
