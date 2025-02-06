@@ -2,7 +2,7 @@ import { Patient } from "./types";
 
 export async function getPatients(): Promise<Patient[]> {
     try{
-        const response = await fetch(`/api/patients/getAllPatients`, {
+        const response = await fetch(`api/v1/patient/getAllPatients`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export async function getPatients(): Promise<Patient[]> {
 
 export async function initiateWorkflow(patientId: string) {
     try{
-        const response = await fetch(`/api/workflow/initiate`, {
+        const response = await fetch(`api/v1/patient/initiateWorkflow`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

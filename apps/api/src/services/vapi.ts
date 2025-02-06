@@ -22,7 +22,7 @@ export class VapiService {
 
   async initiateCall(callConfig: any) {
     // should create an agent or get created agent first
-    const call = await this.createCall(callConfig.CALL_TYPE, callConfig.ASSISTANT_ID);
+    const call = await this.createCall(callConfig.callType, callConfig.assistantId);
     return call;
   }
 

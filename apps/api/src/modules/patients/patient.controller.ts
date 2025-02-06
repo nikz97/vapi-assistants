@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import logger from "../../utils/logger";
 import { getPatientById, getPatients } from ".";
+import { VapiService } from "../../services/vapi";
+import { AGENT_TYPES } from "../../utils/constants";
 
+const vapiService = new VapiService();
 
 export async function getAllPatients(
     req: Request,
@@ -31,10 +34,12 @@ export async function initiateWorkflow(
       if(patient.status !== "NOT_CONTACTED") {
         throw new Error("Patient is already contacted");
       }
-
-      res.status(201).json(patient);
+        // initiate call
+        const assistant = await vapiService.createVapiAssistant(patientId, patient.systemPrompt, patient.vapiConfig);
+        await vapiService.initiateCall({callType: AGENT_TYPES.SCHEDULING,  assistantId: assistant.id});
+      res.status(201).json({message: `Workflow Initiated for ${patient}`});
     } catch (error) {
-      logger.error("Error in handleCallback: " + error);
+      logger.error("Error in workflow: " + error);
       res.status(500).send({
         message: "Something went wrong: " + error,
       });

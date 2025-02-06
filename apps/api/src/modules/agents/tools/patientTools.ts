@@ -1,4 +1,4 @@
-import { Patient } from "@repo/mongoose-schema";
+import { Patient } from "../../../services/mongodb";
 
 export async function updatePatientData(extractedData: any) {
     const patientId = extractedData.patientId;
@@ -17,7 +17,7 @@ export async function updatePatientData(extractedData: any) {
         address: extractedData.address,
         phoneNumber: extractedData.phoneNumber
     }
-    
+
     // Update the document
     await Patient.updateOne({ patientId },
          { $set: patientData });
