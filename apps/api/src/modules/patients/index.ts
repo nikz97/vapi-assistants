@@ -18,6 +18,15 @@ export async function getPatientById(patientId: string) {
     }
 }
 
+export async function updatePatientById(patientId: string, patientData: any) {
+    try {
+        const patient = await Patient.findOneAndUpdate({ patientId }, patientData, { new: true });
+        return patient;
+    } catch (error) {
+        return error;
+    }
+}
+
 export async function addPatient(patientData: any) {
     try {
         const patient = await Patient.create(patientData);

@@ -6,6 +6,7 @@ import logger from "./utils/logger";
 import { vapiRoute } from "./modules/vapi/vapi.route";
 import { BullBoard } from "./services/bullmq";
 import { patientRoute } from "./modules/patients/patients.route";
+import cors from "cors";
 
 dotenv.config();
 
@@ -19,6 +20,13 @@ app.use(
     limit: "5mb",
   }),
 );
+
+app.use(
+  cors({
+    origin: '*', // Allow all origins
+  }),
+);
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Hey! How you doing"); // Placeholder
 });

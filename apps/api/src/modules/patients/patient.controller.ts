@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import logger from "../../utils/logger";
-import { addPatient, getPatientById, getPatients } from ".";
+import { addPatient, getPatientById, getPatients, updatePatientById } from ".";
 import { VapiService } from "../../services/vapi";
 import { AGENT_TYPES } from "../../utils/constants";
 import { getOutboundSchedulingPrompt, getVapiReminderPrompt, VAPI_INBOUND_SYSTEM_PROMPT } from "../vapi/prompts";
@@ -35,6 +35,7 @@ export async function initiateWorkflow(
       if(patient.status !== "NOT_CONTACTED") {
         throw new Error("Patient is already contacted");
       }
+      await updatePatientById(patientId, {status: "CONTACTED"});
         // initiate call
         const systemPrompt = getOutboundSchedulingPrompt(patient);
         const assistant = await vapiService.createVapiAssistant(patientId, systemPrompt);

@@ -52,7 +52,7 @@ const PatientsTable: React.FC = () => {
           </TableHeader>
           <TableBody>
             {patients.map((patient) => (
-              <TableRow key={patient.id}>
+              <TableRow key={patient.patientId}>
                 <TableCell>{patient.name}</TableCell>
                 <TableCell>{patient.age}</TableCell>
                 <TableCell>{patient.phoneNumber}</TableCell>
@@ -61,7 +61,7 @@ const PatientsTable: React.FC = () => {
                   {patient.status === 'NOT_CONTACTED' && (
                     <Button
                       variant="default"
-                      onClick={() => handleStartWorkflow(patient.id)}
+                      onClick={() => handleStartWorkflow(patient.patientId)}
                     >
                       Start Workflow
                     </Button>
@@ -70,7 +70,7 @@ const PatientsTable: React.FC = () => {
                     patient.status !== 'NOT_CONTACTED' && (
                       <Button
                         variant="default"
-                        onClick={() => handleStartWorkflow(patient.id)}
+                        onClick={() => handleStartWorkflow(patient.patientId)}
                       >
                         View Details
                       </Button>

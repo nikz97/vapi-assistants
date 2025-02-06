@@ -2,7 +2,7 @@ import Express from 'express';
 import { createPatient, getAllPatients, initiateReminder, initiateWorkflow } from './patient.controller';
 
 
-const ROUTE_BASE = 'api/v1/patient'
+const ROUTE_BASE = '/api/v1/patient'
 export const patientRoute = (app: Express.Application) => {
      // Vapi Webhook Routes
      app.get(
