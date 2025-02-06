@@ -1,5 +1,5 @@
 import Express from 'express';
-import { getAllPatients, initiateWorkflow } from './patient.controller';
+import { createPatient, getAllPatients, initiateReminder, initiateWorkflow } from './patient.controller';
 
 
 const ROUTE_BASE = 'api/v1/patient'
@@ -14,5 +14,15 @@ export const patientRoute = (app: Express.Application) => {
         `${ROUTE_BASE}/initiateWorkflow`,
         initiateWorkflow,
       );
+    
+      app.post(
+        `${ROUTE_BASE}/addPatient`,
+        createPatient
+      );
+
+      app.post(
+        `${ROUTE_BASE}/initiateReminder`,
+        initiateReminder
+      )
   return app;
 }

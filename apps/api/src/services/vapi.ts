@@ -29,7 +29,7 @@ export class VapiService {
   async createVapiAssistant(
     sessionId: string,
     systemPrompt: string,
-    vapiConfig: any
+    vapiConfig?: any
   ) : Promise<VapiAssistant> {
     try {
         const body = await this.getCreateAssistantBody(
@@ -63,7 +63,7 @@ export class VapiService {
   async getCreateAssistantBody(
     sessionId: string,
     systemPrompt: string,
-    vapiConfig: any
+    vapiConfig?: any
   ) {
     return {
         name: sessionId,

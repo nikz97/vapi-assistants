@@ -15,10 +15,10 @@ export const endOfCallReportHandler = async (
       CallSessionStatus.VAPI_AGENT_CALL_TRANSCRIPT_RECEIVED,
     );
   
-    let extractedVerifications;
+    let extractedDetails;
   
     try {
-      extractedVerifications = await extractDataFromTranscript(
+      extractedDetails = await extractDataFromTranscript(
         payload.transcript || "",
       );
      

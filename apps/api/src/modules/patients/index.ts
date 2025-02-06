@@ -17,3 +17,12 @@ export async function getPatientById(patientId: string) {
         return error;
     }
 }
+
+export async function addPatient(patientData: any) {
+    try {
+        const patient = await Patient.create(patientData);
+        return patient;
+    } catch (error) {
+        return error;
+    }
+}
